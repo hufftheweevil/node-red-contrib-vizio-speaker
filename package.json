@@ -16,17 +16,18 @@
     "start": "pm2 start node-red --watch && pm2 log",
     "stop": "pm2 stop node-red"
   },
-  "author": {
-    "email": "jhalbsgut@gmail.com",
-    "name": "Justin Halbsgut",
-    "url": "https://github.com/hufftheweevil"
-  },
+  "author": "Justin Halbsgut <jhalbsgut@gmail.com> (https://github.com/hufftheweevil)",
   "license": "MIT",
   "dependencies": {
     "vizio-speaker": "vizio-speaker"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/hufftheweevil/node-red-contrib-vizio-speaker"
-  }
+    "url": "git+https://github.com/hufftheweevil/node-red-contrib-vizio-speaker.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hufftheweevil/node-red-contrib-vizio-speaker/issues"
+  },
+  "homepage": "https://github.com/hufftheweevil/node-red-contrib-vizio-speaker#readme",
+  "devDependencies": {}
 }
