@@ -1,0 +1,306 @@
+<script type="text/html" data-template-name="vizio-speaker">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-useSpeaker"><i class="fa fa-volume-up"></i> Speaker</label>
+    <span>
+      <input
+        type="checkbox"
+        id="node-input-useSpeaker"
+        style="width:25px; vertical-align: baseline"
+      />Use specific speaker when msg input
+    </span>
+  </div>
+
+  <div class="form-row node-input-speaker-row">
+    <label for="node-input-speaker"> &ensp;</label>
+    <input type="text" id="node-input-speaker" placeholder="IP Address" />
+  </div>
+
+  <div class="form-row node-input-speaker-row">
+    <label> &ensp;</label>
+    <div style="display:inline">
+      <button id="node-button-test" class="red-ui-button">Test</button>
+      <span id="node-button-test-result"></span>
+    </div>
+  </div>
+
+  <div class="form-row node-input-speaker-row">
+    <label> &ensp;</label>
+    <div style="display:inline">
+      <button id="node-button-pair" class="red-ui-button">Pair</button>
+      <span id="node-button-pair-result"></span>
+    </div>
+  </div>
+
+  <div class="form-row node-input-speaker-row">
+    <label for="node-input-allowSpeakerOverride"> &ensp;</label>
+    <span>
+      <input
+        type="checkbox"
+        id="node-input-allowSpeakerOverride"
+        style="width:25px; vertical-align: baseline"
+      />Allow input topic to override speaker
+    </span>
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-useCommand"><i class="fa fa-terminal"></i> Command</label>
+    <span>
+      <input
+        type="checkbox"
+        id="node-input-useCommand"
+        style="width:25px; vertical-align: baseline"
+      />Use specific command when msg input
+    </span>
+  </div>
+
+  <div class="form-row node-input-command-row">
+    <label for="node-input-command-typed"> &ensp;</label>
+    <input type="text" id="node-input-command-typed" />
+  </div>
+
+  <div class="form-row node-input-command-row">
+    <label for="node-input-allowCommandOverride"> &ensp;</label>
+    <span>
+      <input
+        type="checkbox"
+        id="node-input-allowCommandOverride"
+        style="width:25px; vertical-align: baseline"
+      />Allow input payload to override command
+    </span>
+  </div>
+
+  <div class="form-row node-input-speaker-row">
+    <label for="node-input-startEventsImmed"><i class="fa fa-cogs"></i> Options</label>
+    <span>
+      <input
+        type="checkbox"
+        id="node-input-startEventsImmed"
+        style="width:25px; vertical-align: baseline"
+      />Start events immediately
+    </span>
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-startEventsImmed"><i class="fa fa-bug"></i> Debug</label>
+    <span>
+      <input
+        type="checkbox"
+        id="node-input-showStatus"
+        style="width:25px; vertical-align: baseline"
+      />Show event listeners in status
+    </span>
+  </div>
+
+  <div class="form-row">
+    <label> &ensp;</label>
+    <span>
+      <input
+        type="checkbox"
+        id="node-input-debug"
+        style="width:25px; vertical-align: baseline"
+      />Enable debug
+    </span>
+  </div>
+</script>
+
+<script type="text/html" data-help-name="vizio-speaker">
+  <p>A node to connect to a Vizio SmartCast speaker</p>
+
+  <h3>Properties</h3>
+  <dl class="message-properties">
+    <dt class="optional">Speaker</dt>
+    <dd>
+      IP address of the speaker. When specified, all input messages go to this speaker, unless
+      <i>allow override</i> is enabled and an input message contains a <code>topic</code>.
+    </dd>
+    <dt class="optional">Command</dt>
+    <dd>
+      Command to send to the speaker. When specified, all input messages will cause this command to
+      be sent, unless <i>allow override</i> is enabled and an input message contains a
+      <code>payload</code>.
+    </dd>
+    <dt class="optional">Options</dt>
+    <dd>
+      Events can be started immediately upon node deployment. (Only available if speaker is
+      specified in properties)
+    </dd>
+  </dl>
+  <h3>Input</h3>
+  <dl class="message-properties">
+    <dt class="optional"><code>topic</code> <span class="property-type">string</span></dt>
+    <dd>
+      IP address of the speaker. Only used if not specified in properties, or if
+      <i>speaker override</i> is enabled in properties.
+    </dd>
+    <dt class="optional">
+      <code>payload</code> <span class="property-type">string | number</span>
+    </dt>
+    <dd>
+      Command to send to speaker. Only used if not specified in properties, or if
+      <i>command override</i>
+      is enabled in properties.
+    </dd>
+  </dl>
+  <h3>Commands</h3>
+  <p>If sending commands via input message, the following can be used:</p>
+
+  <ul>
+    <li><code>on</code> - Turn On</li>
+    <li><code>off</code> - Turn Off</li>
+    <li><code>toggle</code> - Toggle Power</li>
+    <li><code>getPower</code> - Get Power</li>
+    <li><code>up</code> - Volume Up</li>
+    <li><code>down</code> - Volume Down</li>
+    <li><code>getVolume</code> - Get Volume</li>
+    <li><code>unmute</code> - Unmute</li>
+    <li><code>mute</code> - Mute</li>
+    <li><code>toggleMute</code> - Toggle Mute</li>
+    <li><code>getMute</code> - Get Mute</li>
+    <li><code>getInput</code> - Get Input</li>
+    <li><code>listInputs</code> - List Inputs</li>
+    <li><code>play</code> - Play</li>
+    <li><code>pause</code> - Pause</li>
+    <li><code>startEvents</code> - Start Events</li>
+    <li><code>stopEvents</code> - Stop Events</li>
+  </ul>
+  <p>
+    Additionally, to change the speaker to an input, send the input name as the command. For
+    example, <code>HDMI</code>. Use <code>listInputs</code> to see all available inputs.
+  </p>
+  <p>To set the volume, send a number as the command</p>
+</script>
+
+<script type="text/javascript">
+  ;(function ($) {
+    $.fn.shide = function (val) {
+      this[val ? 'show' : 'hide']()
+      return this
+    }
+  })(jQuery)
+
+  async function testSpeaker(ip) {
+    return new Promise(resolve => {
+      $.get('/vizio', { ip, type: 'test' }).always((data, status) => {
+        console.log({ data, status })
+        resolve(
+          status != 'success'
+            ? 'Unable to reach server'
+            : data == undefined
+            ? 'Unable to reach speaker'
+            : `Successful connection (Speaker is currently ${data})`
+        )
+      })
+    })
+  }
+
+  const commands = [
+    { value: 'on', label: 'Turn On', hasValue: false },
+    { value: 'off', label: 'Turn Off', hasValue: false },
+    { value: 'toggle', label: 'Toggle Power', hasValue: false },
+    { value: 'getPower', label: 'Get Power', hasValue: false },
+    { value: 'up', label: 'Volume Up', hasValue: false },
+    { value: 'down', label: 'Volume Down', hasValue: false },
+    { value: 'getVolume', label: 'Get Volume', hasValue: false },
+    { value: 'setVolume', label: 'Set Volume' },
+    { value: 'unmute', label: 'Unmute', hasValue: false },
+    { value: 'mute', label: 'Mute', hasValue: false },
+    { value: 'toggleMute', label: 'Toggle Mute', hasValue: false },
+    { value: 'getInput', label: 'Get Input', hasValue: false },
+    { value: 'listInputs', label: 'List Inputs', hasValue: false },
+    { value: 'setInput', label: 'Set Input' },
+    { value: 'play', label: 'Play', hasValue: false },
+    { value: 'pause', label: 'Pause', hasValue: false },
+    { value: 'getMute', label: 'Get Mute', hasValue: false },
+    { value: 'startEvents', label: 'Start Events', hasValue: false },
+    { value: 'stopEvents', label: 'Stop Events', hasValue: false }
+  ]
+
+  RED.nodes.registerType('vizio-speaker', {
+    category: 'devices',
+    defaults: {
+      name: { value: '' },
+      useSpeaker: { value: false },
+      speaker: { value: '' },
+      allowSpeakerOverride: { value: false },
+      useCommand: { value: false },
+      command: { value: '' },
+      allowCommandOverride: { value: false },
+      startEventsImmed: { value: false },
+      showStatus: { value: true },
+      debug: { value: false }
+    },
+    color: '#FFAAAA',
+    inputs: 1,
+    outputs: 1,
+    icon: 'font-awesome/fa-volume-up',
+    label: function () {
+      return this.name || 'Vizio'
+    },
+    labelStyle: function () {
+      return this.name ? 'node_label_italic' : ''
+    },
+    oneditprepare: function () {
+      console.log('oneditprepare', this)
+      $('#node-input-useSpeaker')
+        .on('change', e => $('.node-input-speaker-row').shide(e.target.checked))
+        // .prop('checked', this.speaker != '' && this.speaker != undefined)
+        .change()
+
+      $('#node-input-speaker')
+        .on('keyup change', e => {
+          let isIp = e.target.value.match(/^(\d{1,3}\.){3}\d{1,3}$/)
+          $('#node-button-test').prop('disabled', !isIp)
+        })
+        .change()
+
+      $('#node-button-test').on('click', () => {
+        $('#node-button-test-result').text('Testing...')
+        let ip = $('#node-input-speaker').val()
+        testSpeaker(ip).then(res => {
+          $('#node-button-test-result').text(res)
+        })
+      })
+
+      $('#node-button-test').on('click', () => {
+        let ip = $('#node-input-speaker').val()
+        $.get('/vizio', { ip, type: 'pair' })
+      })
+
+      $('#node-input-command-typed').typedInput({ types: commands })
+
+      if (this.command != '') {
+        let type = this.command
+        let value
+        if (!isNaN(this.command)) {
+          type = 'setVolume'
+          value = +this.command
+        } else if (!commands.map(c => c.value).includes(this.command)) {
+          type = 'setInput'
+          value = this.command
+        }
+        $('#node-input-command-typed').typedInput('type', type)
+        if (value !== undefined) $('#node-input-command-typed').typedInput('value', value)
+      }
+
+      // Do this after setup typedInput so it will format properly
+      $('#node-input-useCommand')
+        .on('change', e => $('.node-input-command-row').shide(e.target.checked))
+        // .prop('checked', this.command != '' && this.command != undefined)
+        .change()
+    },
+    oneditsave: function () {
+      if ($('#node-input-useCommand').is(':checked')) {
+        let type = $('#node-input-command-typed').typedInput('type')
+        let value = $('#node-input-command-typed').typedInput('value')
+        this.command = type.startsWith('set') ? value : type
+      } else {
+        this.command = ''
+      }
+    }
+  })
+</script>

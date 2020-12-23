@@ -1,0 +1,32 @@
+{
+  "name": "node-red-contrib-vizio-speaker",
+  "version": "1.0.0",
+  "description": "A Node-RED node to interact with a Vizio SmartCast speaker",
+  "keywords": [
+    "vizio",
+    "smartcast",
+    "node-red"
+  ],
+  "node-red": {
+    "nodes": {
+      "vizio-speaker": "speaker.js"
+    }
+  },
+  "scripts": {
+    "start": "pm2 start node-red --watch && pm2 log",
+    "stop": "pm2 stop node-red"
+  },
+  "author": {
+    "email": "jhalbsgut@gmail.com",
+    "name": "Justin Halbsgut",
+    "url": "https://github.com/hufftheweevil"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "vizio-speaker": "vizio-speaker"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hufftheweevil/node-red-contrib-vizio-speaker"
+  }
+}
