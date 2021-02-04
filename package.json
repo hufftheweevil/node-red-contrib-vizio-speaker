@@ -19,7 +19,7 @@
   "author": "Justin Halbsgut <jhalbsgut@gmail.com> (https://github.com/hufftheweevil)",
   "license": "MIT",
   "dependencies": {
-    "vizio-speaker": "^1.1.0"
+    "vizio-speaker": "^1.2.1"
   },
   "repository": {
     "type": "git",
