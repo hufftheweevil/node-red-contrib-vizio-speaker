@@ -35,64 +35,68 @@ module.exports = function (RED) {
 
       debug(`Sending command '${cmd}' to ${ip}`)
 
-      let payload // For outbound msg
-      switch (cmd) {
-        case 'on':
-        case 'off':
-        case 'toggle':
-          speaker.power[cmd]()
-          break
-
-        case 'up':
-        case 'down':
-        case 'unmute':
-        case 'mute':
-        case 'toggleMute':
-          speaker.volume[cmd]()
-          break
-
-        case 'play':
-        case 'pause':
-          speaker.media[cmd]()
-          break
-
-        case 'getPower':
-        case 'getInput':
-        case 'getVolume':
-          payload = await speaker[cmd.slice(4).toLowerCase()].get()
-          node.send({ topic: ip, payload })
-          break
-        case 'getMute':
-          payload = await speaker.volume.getMute()
-          node.send({ topic: ip, payload })
-          break
-        case 'listInputs':
-          payload = await speaker.input.list()
-          node.send({ topic: ip, payload })
-          break
-
-        case 'startEvents':
-          startEvents(ip)
-          break
-
-        case 'stopEvents':
-          stopEvents(ip)
-          break
-
-        default:
-          // Set volume level
-          if (!isNaN(+cmd)) {
-            speaker.volume.set(+cmd)
+      try {
+        let payload // For outbound msg
+        switch (cmd) {
+          case 'on':
+          case 'off':
+          case 'toggle':
+            speaker.power[cmd]()
             break
-          }
 
-          // Set input
-          if (Object.values(speaker.settings.input.cache).includes(cmd)) {
-            speaker.input.set(cmd)
+          case 'up':
+          case 'down':
+          case 'unmute':
+          case 'mute':
+          case 'toggleMute':
+            speaker.volume[cmd]()
             break
-          }
 
-          node.warn(`Unknown command ${cmd}`)
+          case 'play':
+          case 'pause':
+            speaker.media[cmd]()
+            break
+
+          case 'getPower':
+          case 'getInput':
+          case 'getVolume':
+            payload = await speaker[cmd.slice(4).toLowerCase()].get()
+            node.send({ topic: ip, payload })
+            break
+          case 'getMute':
+            payload = await speaker.volume.getMute()
+            node.send({ topic: ip, payload })
+            break
+          case 'listInputs':
+            payload = await speaker.input.list()
+            node.send({ topic: ip, payload })
+            break
+
+          case 'startEvents':
+            startEvents(ip)
+            break
+
+          case 'stopEvents':
+            stopEvents(ip)
+            break
+
+          default:
+            // Set volume level
+            if (!isNaN(+cmd)) {
+              speaker.volume.set(+cmd)
+              break
+            }
+
+            // Set input
+            if (Object.values(speaker.settings.input.cache).includes(cmd)) {
+              speaker.input.set(cmd)
+              break
+            }
+
+            node.warn(`Unknown command ${cmd}`)
+        }
+      } catch (err) {
+        node.warn(`Error calling Vizio command: ${err}`)
       }
     })
 
